@@ -1,7 +1,7 @@
-class FirstThreadGroup extends ThreadGroup implements Runnable{
+class FirstThreadGroup extends ThreadGroup implements Runnable {
 
-    public FirstThreadGroup() {
-        super("First Thread Group");
+    public FirstThreadGroup(String name) {
+        super(name);
     }
 
     @Override
@@ -27,16 +27,12 @@ class FirstThreadGroup extends ThreadGroup implements Runnable{
 
 public class ThreadGroupExceptionHandlerTester {
     public static void main(String[] args) throws InterruptedException {
-        new ThreadGroupExceptionHandlerTester().init();
-    }
-
-    public void init() throws InterruptedException {
-        FirstThreadGroup ftg = new FirstThreadGroup();
-        ThreadGroup tg = ftg;
+        FirstThreadGroup ftg = new FirstThreadGroup("First Thread Group");
         Thread t1 = new Thread(ftg, ftg, "Thread #1");
 
         t1.start();
 
+        ThreadGroup tg = ftg;
         new Thread(tg, "Thread #2"){
             @Override
             public void run() {
